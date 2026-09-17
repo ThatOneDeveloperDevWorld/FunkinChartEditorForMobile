@@ -19,11 +19,11 @@ jobs:
         with:
           haxe-version: 4.3.6
 
-      - name: Install Dependencies via HMM
+      - name: Install Project Dependencies
         run: |
           haxelib setup ~/haxelib
-          haxelib install hmm
-          haxelib run hmm install
+          haxelib install hxp
+          haxelib run hxp setup
 
       - name: Run Lime Build for Android
         run: |
