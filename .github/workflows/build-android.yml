@@ -15,7 +15,7 @@ jobs:
           submodules: recursive
 
       - name: Setup Haxe
-        uses: kuan5/setup-haxe@v2
+        uses: krdlab/setup-haxe@v1
         with:
           haxe-version: 4.3.6
 
@@ -28,7 +28,7 @@ jobs:
           haxelib install flixel-addons
           haxelib install flixel-ui
           haxelib install hscript
-          # If your repository has a setup script or project dependencies, you can install them here or let lime handle them
+          haxelib run lime setup -y
 
       - name: Run Lime Build for Android
         run: |
@@ -37,6 +37,6 @@ jobs:
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: funkin-chart-editor-apk
+          name: ThatOneDevEngine-APK
           path: export/**/android/bin/**/*.apk
           
