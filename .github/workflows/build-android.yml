@@ -1,0 +1,42 @@
+name: Build FNF Android
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Setup Haxe
+        uses: kuan5/setup-haxe@v2
+        with:
+          haxe-version: 4.3.6
+
+      - name: Install Dependencies
+        run: |
+          haxelib setup ~/haxelib
+          haxelib install lime
+          haxelib install openfl
+          haxelib install flixel
+          haxelib install flixel-addons
+          haxelib install flixel-ui
+          haxelib install hscript
+          # If your repository has a setup script or project dependencies, you can install them here or let lime handle them
+
+      - name: Run Lime Build for Android
+        run: |
+          haxelib run lime build android -DFEATURE_CHART_EDITOR
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: funkin-chart-editor-apk
+          path: export/**/android/bin/**/*.apk
+          
