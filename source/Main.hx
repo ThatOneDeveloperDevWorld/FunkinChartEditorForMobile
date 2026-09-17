@@ -142,6 +142,9 @@ class Main extends Sprite
     // addChild gets called by the user settings code.
     debugDisplay = new FunkinDebugDisplay(10, 10, 0xFFFFFF);
 
+    // Add your custom FPS and Memory counter
+    addChild(new debug.FPSCounter(10, 3, 0xFFFFFF));
+
     // Add this signal so the player can toggle the debug display using a hotkey.
     FlxG.signals.postUpdate.add(handleDebugDisplayKeys);
 
